@@ -30,7 +30,7 @@ namespace construction
       services.AddSwaggerGen(c =>
       {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "construction", Version = "v1" });
-        // Below potentially ads support for bearer tokens to swagger
+        // Below adds support for bearer tokens to swagger
         var securityScheme = new OpenApiSecurityScheme
         {
           Name = "JWT Authentication",
@@ -50,7 +50,7 @@ namespace construction
     {
         {securityScheme, new string[] { }}
     });
-        // Above potentially ads support for bearer tokens to swagger
+        // Above adds support for bearer tokens to swagger
 
       });
       services.AddScoped<IDbConnection>(x => CreateDbConnection());
