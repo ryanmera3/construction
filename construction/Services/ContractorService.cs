@@ -34,5 +34,14 @@ namespace construction.Services
       }
       return found;
     }
+    internal void Remove(int id, string userId)
+    {
+      Contractor contractor = Get(id);
+      if (contractor.CreatorId != userId)
+      {
+        throw new Exception("You are not allowed to remove this");
+      }
+      _repo.Remove(id);
+    }
   }
 }

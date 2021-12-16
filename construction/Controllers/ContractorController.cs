@@ -48,6 +48,20 @@ namespace construction.Controllers
       }
     }
 
+    [HttpGet("{id}/accounts")]
+    public ActionResult<IEnumerable<AccountContractorViewModel>> GetAccounts(int id)
+    {
+      try
+      {
+        List<AccountContractorViewModel> accounts = _acctService.GetByContractorId(id);
+        return Ok(accounts);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
 
     [HttpPost]
     [Authorize]
@@ -59,6 +73,21 @@ namespace construction.Controllers
         newContractor.CreatorId = userInfo?.Id;
         Contractor contractor = _cs.Create(newContractor);
         return Ok(contractor);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+    [HttpDelete("{id}")]
+    [Authorize]
+    public async Task<ActionResult<Contractor>> Remove(int id)
+    {
+      try
+      {
+        Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+        _cs.Remove(id, userInfo.Id);
+        return Ok("Deleted");
       }
       catch (Exception e)
       {

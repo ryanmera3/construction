@@ -39,5 +39,11 @@ namespace construction.Repositories
       newContractor.Id = id;
       return newContractor;
     }
+
+    internal void Remove(int id)
+    {
+      string sql = "DELETE FROM contractors WHERE id = @id LIMIT 1;";
+      _db.Execute(sql, new { id });
+    }
   }
 }
