@@ -107,7 +107,12 @@ namespace construction
       {
         app.UseDeveloperExceptionPage();
         app.UseSwagger();
-        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "construction v1"));
+        //Editing the SwaggerUi to Enable persist causes it to remember bearer token on refresh and page load
+        app.UseSwaggerUI(c =>
+        {
+          c.EnablePersistAuthorization();
+          c.SwaggerEndpoint("/swagger/v1/swagger.json", "construction v1");
+        });
         app.UseCors("CorsDevPolicy");
       }
 
